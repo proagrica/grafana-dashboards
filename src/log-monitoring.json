@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.0.3"
+      "version": "7.3.5"
     },
     {
       "type": "panel",
@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597396895084,
+  "iteration": 1611583022282,
   "links": [],
   "panels": [
     {
@@ -65,13 +65,14 @@
       "options": {
         "showLabels": false,
         "showTime": true,
-        "sortOrder": "Descending",
+        "sortOrder": "Ascending",
         "wrapLogMessage": true
       },
       "repeat": null,
       "targets": [
         {
-          "expr": "{namespace=\"$namespace\", app=~\"$app\", container=~\"$container\"} |~ \"(?i)$search\"",
+          "expr": "{namespace=\"$namespace\", app=~\"$app\", container=~\"$container\"} | json | line_format \"{{.log}}\" |~ \"(?i)$search\"",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -82,7 +83,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 25,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -93,6 +94,7 @@
           "text": "Loki",
           "value": "Loki"
         },
+        "error": null,
         "hide": 2,
         "includeAll": false,
         "label": null,
@@ -112,6 +114,7 @@
           "text": "Prometheus",
           "value": "Prometheus"
         },
+        "error": null,
         "hide": 2,
         "includeAll": false,
         "label": null,
@@ -130,6 +133,7 @@
         "current": {},
         "datasource": "$DS_PROMETHEUS",
         "definition": "label_values(kube_pod_info, cluster)",
+        "error": null,
         "hide": 2,
         "includeAll": false,
         "label": null,
@@ -152,6 +156,7 @@
         "current": {},
         "datasource": "$DS_PROMETHEUS",
         "definition": "label_values(kube_pod_info{cluster=\"$cluster\"}, namespace)",
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -174,6 +179,7 @@
         "current": {},
         "datasource": "$DS_PROMETHEUS",
         "definition": "label_values(kube_deployment_labels{cluster=\"$cluster\",namespace=\"$namespace\"}, deployment)",
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -196,6 +202,7 @@
         "current": {},
         "datasource": "$DS_PROMETHEUS",
         "definition": "query_result(kube_pod_init_container_info{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"$app.*\"} OR  kube_pod_container_info{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"$app.*\"} )",
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "container",
@@ -219,6 +226,7 @@
           "text": "",
           "value": ""
         },
+        "error": null,
         "hide": 0,
         "label": null,
         "name": "search",
@@ -255,5 +263,5 @@
   "timezone": "",
   "title": "Log Monitoring",
   "uid": "G9MDXaIMz",
-  "version": 11
+  "version": 12
 }
