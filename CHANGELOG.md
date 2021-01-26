@@ -16,7 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Change ordering of Logs in Log Monitoring
-- Change Loki query to support structured logging
+- Change Loki query on Log Monitoring to support structured logging
+- Add inputs for Prometheus and Loki to Log Monitoring
 
 ## v1.0.0 2020-08-14
 
